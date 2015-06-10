@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="windupgui">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Windupgui</title>
+    <link href="styles/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="styles/bootstrap-theme.css" rel="stylesheet" media="screen">
+    <link href="styles/main.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div id="wrap">
+    	
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="offcanvas">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+				    <a class="navbar-brand" href="#">Windupgui</a>
+			    </div>
+			</div>
+    	</div>
+        
+        <div class="container">
+            <div class="row row-offcanvas row-offcanvas-left">
+                <!-- sidebar -->
+                <div class="col-xs-6 col-sm-3 well sidebar-offcanvas">
+                    <a href="app.html">
+                        <img class="hidden-xs img-responsive" src="img/windup-logo.png" alt="JBoss Forge"></img>
+                    </a>
+                    <nav class="sidebar-nav" ng-controller="NavController" role="navigation">
+                        <div id="sidebar-entries" class="list-group">
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Applications')}" href="#/Applications" data-toggle="offcanvas">Applications</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Categories')}" href="#/Categories" data-toggle="offcanvas">Categories</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Countries')}" href="#/Countries" data-toggle="offcanvas">Countries</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Customers')}" href="#/Customers" data-toggle="offcanvas">Customers</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Platforms')}" href="#/Platforms" data-toggle="offcanvas">Platforms</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('PlatformVersions')}" href="#/PlatformVersions" data-toggle="offcanvas">PlatformVersions</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Projects')}" href="#/Projects" data-toggle="offcanvas">Projects</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Technologies')}" href="#/Technologies" data-toggle="offcanvas">Technologies</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('TechnologyGroups')}" href="#/TechnologyGroups" data-toggle="offcanvas">TechnologyGroups</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('Vendors')}" href="#/Vendors" data-toggle="offcanvas">Vendors</a>
+                        </div>
+                    </nav>
+                </div>
+                <!-- main area-->
+                <div class="col-sm-offset-1 col-xs-12 col-sm-8 well mainarea">
+                    <div id="main" ng-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer">
+        <div class="container">
+            <p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
+            <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        </div>
+    </div>
+    
+    <script src="scripts/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="scripts/vendor/jquery-2.0.3.js"></script>
+    <script src="scripts/vendor/bootstrap.js"></script>
+    <script src="scripts/vendor/angular.js"></script>
+    <script src="scripts/vendor/angular-route.js"></script>
+    <script src="scripts/vendor/angular-resource.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/offcanvas.js"></script>
+    <script src="scripts/directives/datepicker.js"></script>
+    <script src="scripts/directives/timepicker.js"></script>
+    <script src="scripts/directives/datetimepicker.js"></script>
+    <script src="scripts/filters/startFromFilter.js"></script>
+    <script src="scripts/filters/genericSearchFilter.js"></script>
+    <script src="scripts/services/locationParser.js"></script>
+    <script src="scripts/services/ApplicationFactory.js"></script>
+    <script src="scripts/controllers/newApplicationController.js"></script>
+    <script src="scripts/controllers/searchApplicationController.js"></script>
+    <script src="scripts/controllers/editApplicationController.js"></script>
+    <script src="scripts/services/CategoryFactory.js"></script>
+    <script src="scripts/controllers/newCategoryController.js"></script>
+    <script src="scripts/controllers/searchCategoryController.js"></script>
+    <script src="scripts/controllers/editCategoryController.js"></script>
+    <script src="scripts/services/CountryFactory.js"></script>
+    <script src="scripts/controllers/newCountryController.js"></script>
+    <script src="scripts/controllers/searchCountryController.js"></script>
+    <script src="scripts/controllers/editCountryController.js"></script>
+    <script src="scripts/services/CustomerFactory.js"></script>
+    <script src="scripts/controllers/newCustomerController.js"></script>
+    <script src="scripts/controllers/searchCustomerController.js"></script>
+    <script src="scripts/controllers/editCustomerController.js"></script>
+    <script src="scripts/services/PlatformFactory.js"></script>
+    <script src="scripts/controllers/newPlatformController.js"></script>
+    <script src="scripts/controllers/searchPlatformController.js"></script>
+    <script src="scripts/controllers/editPlatformController.js"></script>
+    <script src="scripts/services/PlatformVersionFactory.js"></script>
+    <script src="scripts/controllers/newPlatformVersionController.js"></script>
+    <script src="scripts/controllers/searchPlatformVersionController.js"></script>
+    <script src="scripts/controllers/editPlatformVersionController.js"></script>
+    <script src="scripts/services/ProjectFactory.js"></script>
+    <script src="scripts/controllers/newProjectController.js"></script>
+    <script src="scripts/controllers/searchProjectController.js"></script>
+    <script src="scripts/controllers/editProjectController.js"></script>
+    <script src="scripts/services/TechnologyFactory.js"></script>
+    <script src="scripts/controllers/newTechnologyController.js"></script>
+    <script src="scripts/controllers/searchTechnologyController.js"></script>
+    <script src="scripts/controllers/editTechnologyController.js"></script>
+    <script src="scripts/services/TechnologyGroupFactory.js"></script>
+    <script src="scripts/controllers/newTechnologyGroupController.js"></script>
+    <script src="scripts/controllers/searchTechnologyGroupController.js"></script>
+    <script src="scripts/controllers/editTechnologyGroupController.js"></script>
+    <script src="scripts/services/VendorFactory.js"></script>
+    <script src="scripts/controllers/newVendorController.js"></script>
+    <script src="scripts/controllers/searchVendorController.js"></script>
+    <script src="scripts/controllers/editVendorController.js"></script>
+</body>
+</html>

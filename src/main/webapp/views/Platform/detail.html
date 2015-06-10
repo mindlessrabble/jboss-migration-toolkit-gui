@@ -1,0 +1,37 @@
+<header ng-switch on="$location.path().indexOf('/Platforms/new') > -1">
+    <h3 ng-switch-when="true">Create a new Platform</h3>
+    <h3 ng-switch-when="false">View or edit Platform</h3>
+</header>
+<form id="PlatformForm" name="PlatformForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': PlatformForm.name.$invalid}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div id="nameControls" class="col-sm-10">
+            <input id="name" name="name" type="text" required ng-maxlength="50" class="form-control" ng-model="platform.name" placeholder="Enter the Platform Name"></input>
+            <span class="help-block error" ng-show="PlatformForm.name.$error.required">required</span> 
+            <span class="help-block error" ng-show="PlatformForm.name.$error.maxlength">maximum length is 50</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': PlatformForm.vendor.$invalid}">
+        <label for="vendor" class="col-sm-2 control-label">Vendor</label>
+        <div id="vendorControls" class="col-sm-10">
+        <select id="vendor" name="vendor" class="form-control" ng-model="vendorSelection" ng-options="v.text for v in vendorSelectionList"  >
+            <option value="">Choose a Vendor</option>
+        </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="savePlatform" name="savePlatform" class="btn btn-primary" ng-disabled="isClean() || PlatformForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deletePlatform" name="deletePlatform" class="btn btn-danger" ng-show="platform.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

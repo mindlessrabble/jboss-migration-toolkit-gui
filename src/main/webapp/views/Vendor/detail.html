@@ -1,0 +1,36 @@
+<header ng-switch on="$location.path().indexOf('/Vendors/new') > -1">
+    <h3 ng-switch-when="true">Create a new Vendor</h3>
+    <h3 ng-switch-when="false">View or edit Vendor</h3>
+</header>
+<form id="VendorForm" name="VendorForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': VendorForm.name.$invalid}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div id="nameControls" class="col-sm-10">
+            <input id="name" name="name" type="text" required ng-maxlength="50" class="form-control" ng-model="vendor.name" placeholder="Enter the Vendor Name"></input>
+            <span class="help-block error" ng-show="VendorForm.name.$error.required">required</span> 
+            <span class="help-block error" ng-show="VendorForm.name.$error.maxlength">maximum length is 50</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': VendorForm.URL.$invalid}">
+        <label for="URL" class="col-sm-2 control-label">URL</label>
+        <div id="URLControls" class="col-sm-10">
+            <input id="URL" name="URL" type="text" ng-maxlength="110" class="form-control" ng-model="vendor.URL" placeholder="Enter the Vendor URL"></input>
+            <span class="help-block error" ng-show="VendorForm.URL.$error.maxlength">maximum length is 110</span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveVendor" name="saveVendor" class="btn btn-primary" ng-disabled="isClean() || VendorForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteVendor" name="deleteVendor" class="btn btn-danger" ng-show="vendor.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

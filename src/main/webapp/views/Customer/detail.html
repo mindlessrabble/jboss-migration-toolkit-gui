@@ -1,0 +1,90 @@
+<header ng-switch on="$location.path().indexOf('/Customers/new') > -1">
+    <h3 ng-switch-when="true">Create a new Customer</h3>
+    <h3 ng-switch-when="false">View or edit Customer</h3>
+</header>
+<form id="CustomerForm" name="CustomerForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': CustomerForm.name.$invalid}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div id="nameControls" class="col-sm-10">
+            <input id="name" name="name" type="text" required ng-maxlength="50" ng-minlength="2" class="form-control" ng-model="customer.name" placeholder="Enter the Customer Name"></input>
+            <span class="help-block error" ng-show="CustomerForm.name.$error.required">required</span> 
+            <span class="help-block error" ng-show="CustomerForm.name.$error.minlength">minimum length is 2</span>
+            <span class="help-block error" ng-show="CustomerForm.name.$error.maxlength">maximum length is 50</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CustomerForm.telephone.$invalid}">
+        <label for="telephone" class="col-sm-2 control-label">Telephone</label>
+        <div id="telephoneControls" class="col-sm-10">
+            <input id="telephone" name="telephone" type="text" class="form-control" ng-model="customer.telephone" placeholder="Enter the Customer Telephone"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CustomerForm.email.$invalid}">
+        <label for="email" class="col-sm-2 control-label">Email</label>
+        <div id="emailControls" class="col-sm-10">
+            <input id="email" name="email" type="text" class="form-control" ng-model="customer.email" placeholder="Enter the Customer Email"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CustomerForm.street1.$invalid}">
+        <label for="street1" class="col-sm-2 control-label">Street 1</label>
+        <div id="street1Controls" class="col-sm-10">
+            <input id="street1" name="street1" type="text" ng-maxlength="50" class="form-control" ng-model="customer.street1" placeholder="Enter the Customer Street 1"></input>
+            <span class="help-block error" ng-show="CustomerForm.street1.$error.maxlength">maximum length is 50</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CustomerForm.street2.$invalid}">
+        <label for="street2" class="col-sm-2 control-label">Street 2</label>
+        <div id="street2Controls" class="col-sm-10">
+            <input id="street2" name="street2" type="text" class="form-control" ng-model="customer.street2" placeholder="Enter the Customer Street 2"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CustomerForm.city.$invalid}">
+        <label for="city" class="col-sm-2 control-label">City</label>
+        <div id="cityControls" class="col-sm-10">
+            <input id="city" name="city" type="text" ng-maxlength="50" class="form-control" ng-model="customer.city" placeholder="Enter the Customer City"></input>
+            <span class="help-block error" ng-show="CustomerForm.city.$error.maxlength">maximum length is 50</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CustomerForm.state.$invalid}">
+        <label for="state" class="col-sm-2 control-label">State</label>
+        <div id="stateControls" class="col-sm-10">
+            <input id="state" name="state" type="text" class="form-control" ng-model="customer.state" placeholder="Enter the Customer State"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CustomerForm.zipcode.$invalid}">
+        <label for="zipcode" class="col-sm-2 control-label">Zipcode</label>
+        <div id="zipcodeControls" class="col-sm-10">
+            <input id="zipcode" name="zipcode" type="text" ng-maxlength="10" class="form-control" ng-model="customer.zipcode" placeholder="Enter the Customer Zipcode"></input>
+            <span class="help-block error" ng-show="CustomerForm.zipcode.$error.maxlength">maximum length is 10</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CustomerForm.country.$invalid}">
+        <label for="country" class="col-sm-2 control-label">Country</label>
+        <div id="countryControls" class="col-sm-10">
+        <select id="country" name="country" class="form-control" ng-model="countrySelection" ng-options="c.text for c in countrySelectionList"  >
+            <option value="">Choose a Country</option>
+        </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCustomer" name="saveCustomer" class="btn btn-primary" ng-disabled="isClean() || CustomerForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteCustomer" name="deleteCustomer" class="btn btn-danger" ng-show="customer.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

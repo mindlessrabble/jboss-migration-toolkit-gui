@@ -1,0 +1,82 @@
+<header ng-switch on="$location.path().indexOf('/Projects/new') > -1">
+    <h3 ng-switch-when="true">Create a new Project</h3>
+    <h3 ng-switch-when="false">View or edit Project</h3>
+</header>
+<form id="ProjectForm" name="ProjectForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': ProjectForm.name.$invalid}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div id="nameControls" class="col-sm-10">
+            <input id="name" name="name" type="text" required ng-maxlength="30" ng-minlength="1" class="form-control" ng-model="project.name" placeholder="Enter the Project Name"></input>
+            <span class="help-block error" ng-show="ProjectForm.name.$error.required">required</span> 
+            <span class="help-block error" ng-show="ProjectForm.name.$error.minlength">minimum length is 1</span>
+            <span class="help-block error" ng-show="ProjectForm.name.$error.maxlength">maximum length is 30</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': ProjectForm.description.$invalid}">
+        <label for="description" class="col-sm-2 control-label">Description</label>
+        <div id="descriptionControls" class="col-sm-10">
+            <input id="description" name="description" type="text" required ng-maxlength="3000" class="form-control" ng-model="project.description" placeholder="Enter the Project Description"></input>
+            <span class="help-block error" ng-show="ProjectForm.description.$error.required">required</span> 
+            <span class="help-block error" ng-show="ProjectForm.description.$error.maxlength">maximum length is 3000</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': ProjectForm.startDate.$invalid}">
+        <label for="startDate" class="col-sm-2 control-label">Start Date</label>
+        <div id="startDateControls" class="col-sm-10">
+            <date id="startDate" name="startDate" ng-model="project.startDate" placeholder="Enter the Project Start Date"></date>
+            <span class="help-block error" ng-show="ProjectForm.startDate.$error.dateFormat">does not match format "yyyy-MM-dd" (e.g. 2013-12-01)</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': ProjectForm.category.$invalid}">
+        <label for="category" class="col-sm-2 control-label">Category</label>
+        <div id="categoryControls" class="col-sm-10">
+        <select id="category" name="category" class="form-control" ng-model="categorySelection" ng-options="c.text for c in categorySelectionList"  >
+            <option value="">Choose a Category</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': ProjectForm.customer.$invalid}">
+        <label for="customer" class="col-sm-2 control-label">Customer</label>
+        <div id="customerControls" class="col-sm-10">
+        <select id="customer" name="customer" class="form-control" ng-model="customerSelection" ng-options="c.text for c in customerSelectionList"  >
+            <option value="">Choose a Customer</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': ProjectForm.currentPlatform.$invalid}">
+        <label for="currentPlatform" class="col-sm-2 control-label">Current Platform</label>
+        <div id="currentPlatformControls" class="col-sm-10">
+        <select id="currentPlatform" name="currentPlatform" class="form-control" ng-model="currentPlatformSelection" ng-options="c.text for c in currentPlatformSelectionList"  >
+            <option value="">Choose a Current Platform</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': ProjectForm.targetPlatform.$invalid}">
+        <label for="targetPlatform" class="col-sm-2 control-label">Target Platform</label>
+        <div id="targetPlatformControls" class="col-sm-10">
+        <select id="targetPlatform" name="targetPlatform" class="form-control" ng-model="targetPlatformSelection" ng-options="t.text for t in targetPlatformSelectionList"  >
+            <option value="">Choose a Target Platform</option>
+        </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveProject" name="saveProject" class="btn btn-primary" ng-disabled="isClean() || ProjectForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteProject" name="deleteProject" class="btn btn-danger" ng-show="project.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,37 @@
+<header ng-switch on="$location.path().indexOf('/Technologies/new') > -1">
+    <h3 ng-switch-when="true">Create a new Technology</h3>
+    <h3 ng-switch-when="false">View or edit Technology</h3>
+</header>
+<form id="TechnologyForm" name="TechnologyForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': TechnologyForm.name.$invalid}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div id="nameControls" class="col-sm-10">
+            <input id="name" name="name" type="text" required ng-maxlength="50" class="form-control" ng-model="technology.name" placeholder="Enter the Technology Name"></input>
+            <span class="help-block error" ng-show="TechnologyForm.name.$error.required">required</span> 
+            <span class="help-block error" ng-show="TechnologyForm.name.$error.maxlength">maximum length is 50</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': TechnologyForm.technologyGroup.$invalid}">
+        <label for="technologyGroup" class="col-sm-2 control-label">Technology Group</label>
+        <div id="technologyGroupControls" class="col-sm-10">
+        <select id="technologyGroup" name="technologyGroup" class="form-control" ng-model="technologyGroupSelection" ng-options="t.text for t in technologyGroupSelectionList"  >
+            <option value="">Choose a Technology Group</option>
+        </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveTechnology" name="saveTechnology" class="btn btn-primary" ng-disabled="isClean() || TechnologyForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteTechnology" name="deleteTechnology" class="btn btn-danger" ng-show="technology.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

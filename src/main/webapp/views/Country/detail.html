@@ -1,0 +1,69 @@
+<header ng-switch on="$location.path().indexOf('/Countries/new') > -1">
+    <h3 ng-switch-when="true">Create a new Country</h3>
+    <h3 ng-switch-when="false">View or edit Country</h3>
+</header>
+<form id="CountryForm" name="CountryForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': CountryForm.isoCode.$invalid}">
+        <label for="isoCode" class="col-sm-2 control-label">Iso Code</label>
+        <div id="isoCodeControls" class="col-sm-10">
+            <input id="isoCode" name="isoCode" type="text" required ng-maxlength="2" ng-minlength="2" class="form-control" ng-model="country.isoCode" placeholder="Enter the Country Iso Code"></input>
+            <span class="help-block error" ng-show="CountryForm.isoCode.$error.required">required</span> 
+            <span class="help-block error" ng-show="CountryForm.isoCode.$error.minlength">minimum length is 2</span>
+            <span class="help-block error" ng-show="CountryForm.isoCode.$error.maxlength">maximum length is 2</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CountryForm.name.$invalid}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div id="nameControls" class="col-sm-10">
+            <input id="name" name="name" type="text" required ng-maxlength="80" ng-minlength="2" class="form-control" ng-model="country.name" placeholder="Enter the Country Name"></input>
+            <span class="help-block error" ng-show="CountryForm.name.$error.required">required</span> 
+            <span class="help-block error" ng-show="CountryForm.name.$error.minlength">minimum length is 2</span>
+            <span class="help-block error" ng-show="CountryForm.name.$error.maxlength">maximum length is 80</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CountryForm.printableName.$invalid}">
+        <label for="printableName" class="col-sm-2 control-label">Printable Name</label>
+        <div id="printableNameControls" class="col-sm-10">
+            <input id="printableName" name="printableName" type="text" required ng-maxlength="80" ng-minlength="2" class="form-control" ng-model="country.printableName" placeholder="Enter the Country Printable Name"></input>
+            <span class="help-block error" ng-show="CountryForm.printableName.$error.required">required</span> 
+            <span class="help-block error" ng-show="CountryForm.printableName.$error.minlength">minimum length is 2</span>
+            <span class="help-block error" ng-show="CountryForm.printableName.$error.maxlength">maximum length is 80</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CountryForm.iso3.$invalid}">
+        <label for="iso3" class="col-sm-2 control-label">Iso 3</label>
+        <div id="iso3Controls" class="col-sm-10">
+            <input id="iso3" name="iso3" type="text" required ng-maxlength="3" ng-minlength="3" class="form-control" ng-model="country.iso3" placeholder="Enter the Country Iso 3"></input>
+            <span class="help-block error" ng-show="CountryForm.iso3.$error.required">required</span> 
+            <span class="help-block error" ng-show="CountryForm.iso3.$error.minlength">minimum length is 3</span>
+            <span class="help-block error" ng-show="CountryForm.iso3.$error.maxlength">maximum length is 3</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CountryForm.numcode.$invalid}">
+        <label for="numcode" class="col-sm-2 control-label">Numcode</label>
+        <div id="numcodeControls" class="col-sm-10">
+            <input id="numcode" name="numcode" type="text" required ng-maxlength="3" ng-minlength="3" class="form-control" ng-model="country.numcode" placeholder="Enter the Country Numcode"></input>
+            <span class="help-block error" ng-show="CountryForm.numcode.$error.required">required</span> 
+            <span class="help-block error" ng-show="CountryForm.numcode.$error.minlength">minimum length is 3</span>
+            <span class="help-block error" ng-show="CountryForm.numcode.$error.maxlength">maximum length is 3</span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCountry" name="saveCountry" class="btn btn-primary" ng-disabled="isClean() || CountryForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteCountry" name="deleteCountry" class="btn btn-danger" ng-show="country.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>
